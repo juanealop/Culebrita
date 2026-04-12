@@ -1,0 +1,59 @@
+<!-- Vista del HistorialComponent — zero lógica, sólo bindings a señales y comandos del ViewModel -->
+<section class="min-h-screen bg-gray-950 flex flex-col items-center py-10 px-4">
+
+  <!-- Encabezado -->
+  <div class="w-full max-w-2xl flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-white tracking-wide">Historial de Partidas</h1>
+    <button
+      (click)="onVolver()"
+      class="bg-gray-700 hover:bg-gray-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+      ← Volver al juego
+    </button>
+  </div>
+
+  <!-- Cargando -->
+  @if (cargando()) {
+    <p class="text-gray-400 text-lg animate-pulse">Cargando historial…</p>
+  }
+
+  <!-- Error -->
+  @if (error()) {
+    <p class="text-red-400 text-lg">No se pudo obtener el historial.</p>
+  }
+
+  <!-- Sin registros -->
+  @if (sinRegistros()) {
+    <p class="text-gray-500 text-lg">Aún no hay partidas registradas.</p>
+  }
+
+  <!-- Tabla de partidas -->
+  @if (!cargando() && !error() && partidas().length > 0) {
+    <div class="w-full max-w-2xl overflow-x-auto rounded-xl shadow-lg">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="bg-gray-800 text-gray-400 uppercase text-xs tracking-wider">
+          <tr>
+            <th class="px-5 py-3">#</th>
+            <th class="px-5 py-3">Fecha</th>
+            <th class="px-5 py-3">Duración</th>
+            <th class="px-5 py-3">Tamaño máximo</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of partidas(); track p.id; let i = $index) {
+            <tr class="border-t border-gray-700 hover:bg-gray-800 transition-colors">
+              <td class="px-5 py-3 text-gray-500">{{ i + 1 }}</td>
+              <td class="px-5 py-3">{{ formatearFecha(p.fecha) }}</td>
+              <td class="px-5 py-3 font-mono">{{ formatearDuracion(p.duracionSegundos) }}</td>
+              <td class="px-5 py-3">
+                <span class="bg-green-800 text-green-200 px-2 py-0.5 rounded-full font-semibold">
+                  {{ p.tamanoMaximo }} segmentos
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+</section>

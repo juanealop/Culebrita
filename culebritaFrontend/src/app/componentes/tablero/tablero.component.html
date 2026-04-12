@@ -1,0 +1,10 @@
+<!-- Vista del tablero (capa View en MVC) -->
+<!-- El fondo gris del contenedor actúa como líneas de cuadrícula -->
+<div
+  class="grid bg-gray-300 gap-px p-px"
+  style="grid-template-columns: repeat(20, minmax(0, 1fr)); width: 482px; height: 482px;"
+>
+  @for (celda of tableroPlanar; track $index) {
+    <div [class]="obtenerClaseCelda(celda)"></div>
+  }
+</div>
