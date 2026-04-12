@@ -3,6 +3,7 @@ package com.taller.culebritaBackend.servicio;
 import com.taller.culebritaBackend.dto.PartidaDTO;
 import com.taller.culebritaBackend.modelo.Partida;
 import com.taller.culebritaBackend.repositorio.PartidaRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class PartidaServicio {
 
     private final PartidaRepositorio repositorio;
 
+    @Autowired
     public PartidaServicio(PartidaRepositorio repositorio) {
         this.repositorio = repositorio;
     }

@@ -3,19 +3,21 @@ package com.taller.culebritaBackend.controlador;
 import com.taller.culebritaBackend.dto.MensajeAccionDTO;
 import com.taller.culebritaBackend.modelo.Direccion;
 import com.taller.culebritaBackend.servicio.JuegoServicio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
-/**
- * Controlador WebSocket (capa Controller del patrón MVC).
- * Recibe acciones del cliente en /app/accion y delega al servicio.
- * El servicio hace el broadcast del estado por /tema/estado.
+/*
+ Controlador WebSocket (capa Controller del patrón MVC).
+ Recibe acciones del cliente en /app/accion y delega al servicio.
+ El servicio hace el broadcast del estado por /tema/estado.
  */
 @Controller
 public class JuegoControlador {
 
     private final JuegoServicio juegoServicio;
 
+    @Autowired
     public JuegoControlador(JuegoServicio juegoServicio) {
         this.juegoServicio = juegoServicio;
     }

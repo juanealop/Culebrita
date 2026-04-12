@@ -9,6 +9,7 @@ import com.taller.culebritaBackend.modelo.Culebra;
 import com.taller.culebritaBackend.modelo.Direccion;
 import com.taller.culebritaBackend.modelo.Posicion;
 import com.taller.culebritaBackend.modelo.Tablero;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,7 @@ public class JuegoServicio {
     private EstadoJuego estadoActual;
     private ScheduledFuture<?> tareaJuego;
 
+    @Autowired
     public JuegoServicio(SimpMessagingTemplate mensajeria, PartidaServicio partidaServicio) {
         this.mensajeria = mensajeria;
         this.partidaServicio = partidaServicio;

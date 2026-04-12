@@ -2,11 +2,15 @@ package com.taller.culebritaBackend.dto;
 
 import java.time.Instant;
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * DTO de respuesta para el historial de partidas.
  * Solo expone los campos que necesita el frontend.
  */
+@Getter
+@Setter
 public class PartidaDTO {
 
     private UUID id;
@@ -22,16 +26,4 @@ public class PartidaDTO {
         this.duracionSegundos = duracionSegundos;
         this.tamanoMaximo = tamanoMaximo;
     }
-
-    public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
-
-    public Instant getFecha() { return fecha; }
-    public void setFecha(Instant fecha) { this.fecha = fecha; }
-
-    public long getDuracionSegundos() { return duracionSegundos; }
-    public void setDuracionSegundos(long duracionSegundos) { this.duracionSegundos = duracionSegundos; }
-
-    public int getTamanoMaximo() { return tamanoMaximo; }
-    public void setTamanoMaximo(int tamanoMaximo) { this.tamanoMaximo = tamanoMaximo; }
 }

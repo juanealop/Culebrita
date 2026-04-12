@@ -9,4 +9,5 @@ spring:
     port: ${SPRING_CASSANDRA_PORT:9042}
     local-datacenter: ${SPRING_CASSANDRA_LOCAL_DATACENTER:datacenter1}
     keyspace-name: ${SPRING_CASSANDRA_KEYSPACE_NAME:culebrita}
+    replication-factor: ${SPRING_CASSANDRA_REPLICATION_FACTOR:2}
     schema-action: ${SPRING_CASSANDRA_SCHEMA_ACTION:CREATE_IF_NOT_EXISTS}
