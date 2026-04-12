@@ -34,5 +34,14 @@ services:
       cassandra:
         condition: service_healthy
 
+  frontend:
+    build:
+      context: ./culebritaFrontend
+    container_name: culebrita-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
 volumes:
   cassandra_data:
