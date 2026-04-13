@@ -1,0 +1,85 @@
+<!-- Vista del juego: cero lógica, sólo bindings al VistaModelo (vm) -->
+
+@if (vm.esHistorial()) {
+  <app-historial (volver)="vm.volver()" />
+}
+
+@if (!vm.esHistorial()) {
+  <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center gap-6 p-6">
+    <h1 class="text-4xl font-bold text-gray-800 tracking-tight">Culebrita</h1>
+
+    <div class="flex items-center gap-8">
+      <div class="text-center">
+        <p class="text-xs uppercase text-gray-500 font-semibold tracking-widest">Puntuación</p>
+        <p class="text-3xl font-bold text-gray-800">{{ vm.puntuacion() }}</p>
+      </div>
+
+      <div class="text-center">
+        <p class="text-xs uppercase text-gray-500 font-semibold tracking-widest">Estado</p>
+        <span
+          class="inline-block px-3 py-1 rounded-full text-sm font-semibold"
+          [ngClass]="vm.claseEstadoBadge()"
+        >
+          {{ vm.etiquetaEstado() }}
+        </span>
+      </div>
+    </div>
+
+    <div class="relative">
+      <app-tablero [tablero]="vm.tablero()" />
+      <button
+        (click)="vm.verHistorial()"
+        title="Ver historial de partidas"
+        class="absolute top-2 right-2 bg-gray-800/80 hover:bg-gray-700 text-white text-xs font-semibold px-2 py-1 rounded-md transition-colors z-10"
+      >
+        Historial
+      </button>
+    </div>
+
+    <div class="flex gap-3">
+      @if (vm.mostrarIniciar()) {
+        <button
+          (click)="vm.iniciar()"
+          class="px-5 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
+        >
+          Iniciar
+        </button>
+      }
+
+      @if (vm.mostrarPausar()) {
+        <button
+          (click)="vm.pausar()"
+          class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+        >
+          Pausar
+        </button>
+      }
+
+      @if (vm.mostrarReiniciar()) {
+        <button
+          (click)="vm.reiniciar()"
+          class="px-5 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
+        >
+          Reiniciar
+        </button>
+      }
+    </div>
+
+    @if (vm.juegoTerminado()) {
+      <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-10">
+        <div class="bg-white rounded-2xl shadow-xl p-8 text-center flex flex-col gap-4">
+          <h2 class="text-3xl font-bold text-red-600">Juego Terminado</h2>
+          <p class="text-xl text-gray-700">
+            Puntuación final: <span class="font-bold">{{ vm.puntuacion() }}</span>
+          </p>
+          <button
+            (click)="vm.reiniciar()"
+            class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
+          >
+            Jugar de nuevo
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+}

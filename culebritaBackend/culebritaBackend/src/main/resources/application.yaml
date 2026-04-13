@@ -9,5 +9,10 @@ spring:
     port: ${SPRING_CASSANDRA_PORT:9042}
     local-datacenter: ${SPRING_CASSANDRA_LOCAL_DATACENTER:datacenter1}
     keyspace-name: ${SPRING_CASSANDRA_KEYSPACE_NAME:culebrita}
-    replication-factor: ${SPRING_CASSANDRA_REPLICATION_FACTOR:2}
+    replication-factor: ${SPRING_CASSANDRA_REPLICATION_FACTOR:1}
     schema-action: ${SPRING_CASSANDRA_SCHEMA_ACTION:CREATE_IF_NOT_EXISTS}
+    request:
+      timeout: ${SPRING_CASSANDRA_REQUEST_TIMEOUT:15s}
+    connection:
+      connect-timeout: ${SPRING_CASSANDRA_CONNECTION_CONNECT_TIMEOUT:15s}
+      init-query-timeout: ${SPRING_CASSANDRA_CONNECTION_INIT_QUERY_TIMEOUT:20s}

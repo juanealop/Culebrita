@@ -1,4 +1,4 @@
-<!-- Vista del HistorialComponent — zero lógica, sólo bindings a señales y comandos del ViewModel -->
+<!-- Vista del historial: cero lógica, sólo bindings a señales y comandos -->
 <section class="min-h-screen bg-white flex flex-col items-center py-10 px-4">
 
   <!-- Encabezado -->
@@ -45,9 +45,7 @@
               <td class="px-5 py-3">{{ formatearFecha(p.fecha) }}</td>
               <td class="px-5 py-3 font-mono">{{ formatearDuracion(p.duracionSegundos) }}</td>
               <td class="px-5 py-3">
-                <span class="text-black font-semibold">
-                  {{ p.tamanoMaximo }} segmentos
-                </span>
+                <span class="text-black font-semibold">{{ p.tamanoMaximo }} segmentos</span>
               </td>
             </tr>
           }

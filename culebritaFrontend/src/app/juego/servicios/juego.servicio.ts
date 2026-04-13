@@ -2,22 +2,23 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Client, Message } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-import { EstadoTablero } from '../modelos/estado-tablero.modelo';
-import { Partida } from '../modelos/partida.modelo';
+import { environment } from '../../../environments/environment';
+import { EstadoTablero } from '../../modelos/estado-tablero.modelo';
+import { Partida } from '../../modelos/partida.modelo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JuegoServicio implements OnDestroy {
 
-  private readonly SERVIDOR_URL = 'http://localhost:8080/culebrita-ws';
+  private readonly SERVIDOR_URL   = environment.websocketUrl;
   private readonly TEMA_ESTADO    = '/tema/estado';
   private readonly TEMA_HISTORIAL = '/tema/historial';
   private readonly APP_ACCION     = '/app/accion';
 
   private cliente!: Client;
   private conectado = false;
-  private estadoSubject   = new BehaviorSubject<EstadoTablero | null>(null);
+  private estadoSubject    = new BehaviorSubject<EstadoTablero | null>(null);
   private historialSubject = new BehaviorSubject<Partida[]>([]);
 
   readonly estado$    = this.estadoSubject.asObservable();
@@ -76,4 +77,3 @@ export class JuegoServicio implements OnDestroy {
     this.cliente?.deactivate();
   }
 }
-

@@ -2,6 +2,7 @@ services:
   cassandra1:
     image: cassandra:5.0
     container_name: culebrita-cassandra-1
+    restart: unless-stopped
     ports:
       - "9042:9042"
     environment:
@@ -19,52 +20,34 @@ services:
       retries: 10
       start_period: 40s
 
-  cassandra2:
-    image: cassandra:5.0
-    container_name: culebrita-cassandra-2
-    ports:
-      - "9043:9042"
-    environment:
-      CASSANDRA_CLUSTER_NAME: culebrita
-      CASSANDRA_DC: datacenter1
-      CASSANDRA_RACK: rack1
-      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
-      CASSANDRA_SEEDS: cassandra1
-    volumes:
-      - cassandra2_data:/var/lib/cassandra
-    depends_on:
-      cassandra1:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "cqlsh -e 'DESCRIBE KEYSPACES' localhost 9042 > /dev/null 2>&1"]
-      interval: 20s
-      timeout: 10s
-      retries: 10
-      start_period: 40s
+  
 
   backend:
     build:
       context: ./culebritaBackend/culebritaBackend
     container_name: culebrita-backend
+    restart: on-failure
     ports:
       - "8080:8080"
     environment:
-      SPRING_CASSANDRA_CONTACT_POINTS: cassandra1,cassandra2
+      SPRING_CASSANDRA_CONTACT_POINTS: ${SPRING_CASSANDRA_CONTACT_POINTS:-cassandra1}
       SPRING_CASSANDRA_PORT: 9042
       SPRING_CASSANDRA_LOCAL_DATACENTER: datacenter1
       SPRING_CASSANDRA_KEYSPACE_NAME: culebrita
-      SPRING_CASSANDRA_REPLICATION_FACTOR: 2
+      SPRING_CASSANDRA_REPLICATION_FACTOR: ${SPRING_CASSANDRA_REPLICATION_FACTOR:-1}
       SPRING_CASSANDRA_SCHEMA_ACTION: CREATE_IF_NOT_EXISTS
+      SPRING_CASSANDRA_REQUEST_TIMEOUT: 15s
+      SPRING_CASSANDRA_CONNECTION_CONNECT_TIMEOUT: 15s
+      SPRING_CASSANDRA_CONNECTION_INIT_QUERY_TIMEOUT: 20s
     depends_on:
       cassandra1:
-        condition: service_healthy
-      cassandra2:
         condition: service_healthy
 
   frontend:
     build:
       context: ./culebritaFrontend
     container_name: culebrita-frontend
+    restart: unless-stopped
     ports:
       - "4200:80"
     depends_on:

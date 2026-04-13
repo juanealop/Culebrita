@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Arrays;
+import java.util.List;
+
 /*
   Crea el keyspace de Cassandra si no existe antes de que
   Spring Data intente conectarse a él.
@@ -18,9 +21,23 @@ public class CassandraKeyspaceConfig {
             @Value("${spring.cassandra.port:9042}") int puerto,
             @Value("${spring.cassandra.local-datacenter:datacenter1}") String datacenter,
             @Value("${spring.cassandra.keyspace-name:culebrita}") String keyspace,
-            @Value("${spring.cassandra.replication-factor:2}") int replicationFactor) {
+            @Value("${spring.cassandra.replication-factor:1}") int replicationFactor) {
 
-        String[] nodos = contactPoint.split(",");
+        List<String> nodos = Arrays.stream(contactPoint.split(","))
+                .map(String::trim)
+                .filter(nodo -> !nodo.isBlank())
+                .toList();
+
+        if (nodos.isEmpty()) {
+            nodos = List.of("localhost");
+        }
+
+        int rfEfectivo = Math.max(1, Math.min(replicationFactor, nodos.size()));
+        boolean variosNodos = nodos.size() > 1;
+
+        String replicationClause = variosNodos
+                ? "{'class':'NetworkTopologyStrategy','" + datacenter + "':" + rfEfectivo + "}"
+                : "{'class':'SimpleStrategy','replication_factor':" + rfEfectivo + "}";
 
         // Conectamos al sistema para crear el keyspace
         var builder = CqlSession.builder()
@@ -33,7 +50,7 @@ public class CassandraKeyspaceConfig {
         try (CqlSession sesionSistema = builder.build()) {
             sesionSistema.execute(
                 "CREATE KEYSPACE IF NOT EXISTS " + keyspace +
-                " WITH replication = {'class':'NetworkTopologyStrategy','" + datacenter + "':" + replicationFactor + "};"
+                " WITH replication = " + replicationClause + ";"
             );
         }
 
