@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { computed, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { JuegoServicio } from './servicios/juego.servicio';
-import { EstadoTablero } from '../modelos/estado-tablero.modelo';
+import { JuegoServicio } from './servicios/juegoServicio';
+import { EstadoTablero } from '../modelos/estadoTableroModelo';
 
 /**
  * VistaModelo del juego (patrón MVVM).

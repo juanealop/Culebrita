@@ -3,8 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Client, Message } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { environment } from '../../../environments/environment';
-import { EstadoTablero } from '../../modelos/estado-tablero.modelo';
-import { Partida } from '../../modelos/partida.modelo';
+import { EstadoTablero } from '../../modelos/estadoTableroModelo';
+import { Partida } from '../../modelos/partidaModelo';
 
 @Injectable({
   providedIn: 'root',

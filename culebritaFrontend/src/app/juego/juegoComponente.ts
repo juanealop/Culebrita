@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { JuegoVistaModelo } from './juego.vista-modelo';
-import { TableroComponent } from './componentes/tablero/tablero.component';
-import { HistorialComponent } from './componentes/historial/historial.component';
+import { JuegoVistaModelo } from './juegoVistaModelo';
+import { TableroComponent } from './componentes/tablero/tableroComponent';
+import { HistorialComponent } from './componentes/historial/historialComponent';
 
 /**
  * Vista del juego (patrón MVVM).
@@ -16,8 +16,8 @@ import { HistorialComponent } from './componentes/historial/historial.component'
   selector: 'app-juego',
   standalone: true,
   imports: [NgClass, TableroComponent, HistorialComponent],
-  templateUrl: './juego.componente.html',
-  styleUrl: './juego.componente.css',
+  templateUrl: './juegoComponente.html',
+  styleUrl: './juegoComponente.css',
   providers: [JuegoVistaModelo],
 })
 export class JuegoComponente implements OnInit {

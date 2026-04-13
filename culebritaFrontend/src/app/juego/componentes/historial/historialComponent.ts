@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, output, computed, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { JuegoServicio } from '../../servicios/juego.servicio';
-import { Partida } from '../../../modelos/partida.modelo';
+import { JuegoServicio } from '../../servicios/juegoServicio';
+import { Partida } from '../../../modelos/partidaModelo';
 
 @Component({
   selector: 'app-historial',
   standalone: true,
-  templateUrl: './historial.component.html',
+  templateUrl: './historialComponent.html',
 })
 export class HistorialComponent implements OnInit, OnDestroy {
 
