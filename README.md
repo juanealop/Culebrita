@@ -1,64 +1,70 @@
 # Culebrita Game — Arquitectura en Tiempo Real con WebSockets
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Angular-Frontend-red?logo=angular" />
-  <img src="https://img.shields.io/badge/SpringBoot-Backend-green?logo=springboot" />
-  <img src="https://img.shields.io/badge/Cassandra-Database-blue?logo=apachecassandra" />
-  <img src="https://img.shields.io/badge/WebSocket-RealTime-orange" />
-  <img src="https://img.shields.io/badge/Docker-Containerized-blue?logo=docker" />
+  <img src="https://img.shields.io/badge/Angular-Frontend-DD0031?logo=angular&logoColor=white" />
+  <img src="https://img.shields.io/badge/SpringBoot-Backend-6DB33F?logo=springboot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Apache_Cassandra-Database-1287B1?logo=apachecassandra&logoColor=white" />
+  <img src="https://img.shields.io/badge/WebSockets-RealTime-F7DF1E?logo=websocket&logoColor=black" />
+  <img src="https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white" />
+</p>
+
+<p align="center">
+  <b>Arquitectura distribuida • Comunicación en tiempo real • Backend-driven logic</b>
 </p>
 
 ---
 
-## 🚀 Descripción del Sistema
+## 🧩 Descripción del Sistema
 
-**Culebrita Game** es una aplicación distribuida en tiempo real basada en el clásico juego Snake, implementada bajo una arquitectura moderna cliente-servidor. A diferencia de versiones tradicionales, la lógica del juego no reside en el cliente, sino completamente en el backend, permitiendo una ejecución desacoplada, escalable y consistente.
+**Culebrita Game** es una aplicación distribuida en tiempo real basada en el clásico juego Snake, diseñada bajo una arquitectura moderna cliente-servidor altamente desacoplada.
 
-El sistema gestiona partidas mediante una **máquina de estados**, permitiendo transiciones controladas entre estados como espera, juego activo, pausa y finalización. La interacción del usuario se realiza a través de eventos enviados al backend, el cual procesa la lógica del juego (movimientos, colisiones, puntuación) y transmite continuamente el estado actualizado del tablero al frontend mediante **WebSockets**.
+A diferencia de implementaciones tradicionales, **toda la lógica del juego reside en el backend**, permitiendo una ejecución consistente, escalable y controlada. El frontend actúa únicamente como una capa de visualización reactiva y captura de eventos.
 
-El frontend actúa exclusivamente como un renderizador reactivo y controlador de entrada, mientras que el backend centraliza toda la lógica de negocio. Adicionalmente, el sistema persiste el historial de partidas en una base de datos distribuida, garantizando disponibilidad y tolerancia a fallos.
+El sistema implementa una **máquina de estados**, gestionando el ciclo de vida de cada partida (espera, ejecución, pausa y finalización). Cada interacción del usuario se envía al backend, donde se procesa la lógica completa del juego (movimientos, colisiones, puntuación), retornando el estado actualizado en tiempo real mediante **WebSockets**.
 
----
-
-## 🧠 Arquitectura del Sistema
-
-El sistema sigue un enfoque híbrido basado en **MVC + MVVM + comunicación en tiempo real**:
-
-- **Frontend (Vista - MVVM)**: Angular gestiona la interfaz y sincroniza el estado mediante data binding.
-- **Backend (Controlador + Modelo - MVC)**: Spring Boot procesa la lógica del juego y coordina eventos.
-- **Persistencia (Modelo)**: Cassandra almacena el historial de partidas.
-- **Comunicación**: WebSockets permite interacción bidireccional en tiempo real.
+Adicionalmente, el sistema persiste el historial de partidas en una base de datos distribuida, garantizando alta disponibilidad y tolerancia a fallos.
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## 🏗️ Arquitectura del Sistema
 
-### 🎨 Frontend
-- **Angular** → Framework SPA basado en componentes
-- **TypeScript** → Tipado estático para mayor mantenibilidad
-- **Tailwind CSS** → Estilos rápidos y responsivos
-- **RxJS** → Programación reactiva
+El sistema implementa un enfoque híbrido basado en:
 
-### ⚙️ Backend
-- **Spring Boot (Java)** → Framework empresarial para lógica de negocio
-- **Spring WebSocket** → Comunicación en tiempo real
-- **Spring Data Cassandra** → Acceso a datos desacoplado
+- **MVC (Backend)** → Control de lógica y orquestación
+- **MVVM (Frontend)** → Sincronización reactiva de la UI
+- **WebSockets** → Comunicación bidireccional en tiempo real
 
-### 🗄️ Base de Datos
-- **Apache Cassandra** → Base de datos NoSQL distribuida
-  - Alta disponibilidad
-  - Escalabilidad horizontal
-  - Optimizada para escritura
+### 🔎 Distribución de responsabilidades
 
-### 🔌 Comunicación
-- **WebSockets** → Canal full-duplex persistente
-  - Baja latencia
-  - Actualización en tiempo real
-  - Sin recarga de página
+| Capa | Tecnología | Responsabilidad |
+|------|----------|---------------|
+| Frontend | Angular | Renderizado y captura de eventos |
+| Backend | Spring Boot | Lógica de negocio y control |
+| Modelo | Java + State Pattern | Gestión del estado del juego |
+| Persistencia | Cassandra | Almacenamiento distribuido |
+| Comunicación | WebSockets | Sincronización en tiempo real |
 
-### 🐳 Infraestructura
-- **Docker** → Contenerización de servicios
-- **Docker Compose** → Orquestación multi-contenedor
+---
+
+## 🛠️ Stack Tecnológico
+
+### 🔧 Tecnologías principales
+
+| Categoría | Tecnología | Descripción |
+|----------|----------|------------|
+| Frontend | Angular + TypeScript | SPA reactiva basada en componentes |
+| Backend | Spring Boot | Framework empresarial para lógica de negocio |
+| Base de datos | Apache Cassandra | NoSQL distribuida y altamente disponible |
+| Comunicación | WebSockets | Canal full-duplex de baja latencia |
+| 🐳 Infraestructura | Docker + Docker Compose | Contenerización y orquestación |
+
+### Características clave
+
+- Arquitectura desacoplada cliente-servidor  
+- Procesamiento centralizado en backend  
+- Comunicación en tiempo real sin polling  
+- Persistencia distribuida y escalable  
+- Despliegue reproducible mediante contenedores  
 
 ---
 
@@ -66,19 +72,17 @@ El sistema sigue un enfoque híbrido basado en **MVC + MVVM + comunicación en t
 
 ### 📦 Requisitos Previos
 
-Para ejecutar correctamente el sistema es necesario contar con un entorno preparado para contenerización. Asegúrate de tener instalado:
+Para ejecutar correctamente el sistema es necesario contar con un entorno preparado para contenerización:
 
 - 🐳 Docker  
 - 🐳 Docker Compose  
 - 🔧 Git  
 
-> No es necesario instalar Node.js, Java o Cassandra manualmente, ya que todo se ejecuta dentro de contenedores.
+> No es necesario instalar Node.js, Java o Cassandra manualmente.
 
 ---
 
 ### 🔽 Paso 1: Clonar el repositorio
-
-El primer paso consiste en obtener el código fuente del proyecto desde el repositorio público. Esto permitirá acceder a la configuración completa del sistema, incluyendo frontend, backend y archivos de Docker.
 
 ```bash
 git clone https://github.com/tu-usuario/tu-repositorio.git
@@ -87,39 +91,35 @@ cd tu-repositorio
 
 ---
 
-### 🐳 Paso 2: Construcción y despliegue del sistema
-
-Una vez dentro del proyecto, se procede a levantar todos los servicios utilizando Docker Compose. Este comando se encarga de construir las imágenes necesarias y ejecutar los contenedores definidos.
+### 🐳 Paso 2: Construcción y despliegue
 
 ```bash
 docker-compose up --build
 ```
 
-Durante este proceso ocurren automáticamente las siguientes acciones:
+Este proceso ejecuta automáticamente:
 
-- 🔨 Se construye la imagen del backend basada en Spring Boot  
-- 🎨 Se construye la imagen del frontend basada en Angular  
-- 🗄️ Se levanta un contenedor de Cassandra como base de datos  
-- 🌐 Se crea una red interna entre todos los servicios  
-- 🔗 Se establece la comunicación entre frontend, backend y base de datos  
+- Build del backend (Spring Boot)  
+- Build del frontend (Angular)  
+- Inicialización de Cassandra  
+- Creación de red interna  
+- Integración entre servicios  
 
 ---
 
 ### 🌐 Paso 3: Acceso al sistema
 
-Una vez todos los contenedores estén en ejecución, el sistema queda disponible a través de los siguientes endpoints:
-
-- 🎨 Frontend (Interfaz de usuario): http://localhost:4200  
-- ⚙️ Backend (API y WebSocket): http://localhost:8080  
-- 📡 WebSocket (tiempo real): ws://localhost:8080/ws  
-
-El frontend se conecta automáticamente al backend mediante WebSockets, permitiendo interacción en tiempo real sin recargas de página.
+| Servicio | URL |
+|--------|-----|
+| Frontend | http://localhost:4200 |
+| Backend | http://localhost:8080 |
+| WebSocket | ws://localhost:8080/ws |
 
 ---
 
-### ⚙️ Paso 4: Ejecución alternativa (modo híbrido)
+### ⚙️ Paso 4: Ejecución alternativa
 
-En caso de requerir ejecutar el frontend de forma local (por ejemplo, para desarrollo), es posible levantar únicamente el backend y la base de datos con Docker.
+Backend + DB con Docker:
 
 ```bash
 cd backend
@@ -127,7 +127,7 @@ docker build -t culebrita-backend .
 docker-compose up
 ```
 
-Posteriormente, el frontend puede ejecutarse manualmente:
+Frontend local:
 
 ```bash
 cd frontend
@@ -135,33 +135,38 @@ npm install
 ng serve
 ```
 
-En este escenario, el frontend se conectará al backend expuesto en `localhost:8080`.
+---
+
+## 🔄 Flujo del Sistema (End-to-End)
+
+El sistema opera bajo un flujo reactivo en tiempo real:
+
+```text
+🎮 Usuario → Angular → WebSocket → Spring Boot
+       → Lógica del juego → Estado actualizado
+       → WebSocket → Renderizado UI
+       → Persistencia en Cassandra
+```
+
+### 🔁 Secuencia detallada
+
+1. 🎮 El usuario genera eventos de entrada (teclado)  
+2. 📡 Angular envía la acción al backend  
+3. ⚙️ Spring Boot procesa la lógica  
+4. 🧠 Se actualiza el estado del juego  
+5. 🔁 Se genera nuevo estado del tablero  
+6. 🎨 Angular renderiza en tiempo real  
+7. 💾 Se persiste la partida en Cassandra  
+8. 📊 Se consulta historial desde el frontend  
 
 ---
 
-### 🔄 Flujo del Sistema (End-to-End)
-
-El funcionamiento completo del sistema sigue un flujo de interacción en tiempo real entre sus componentes:
-
-1. 🎮 El usuario interactúa con el frontend mediante eventos de teclado (direcciones).  
-2. 📡 Angular captura la acción y envía un mensaje al backend utilizando WebSocket.  
-3. ⚙️ Spring Boot recibe el evento y lo procesa a través de los servicios de negocio.  
-4. 🧠 Se actualiza el estado del juego (posición de la culebra, comida, colisiones y puntaje) mediante la máquina de estados.  
-5. 🔁 El backend genera un nuevo estado del tablero y lo envía al frontend mediante WebSocket.  
-6. 🎨 Angular recibe el estado actualizado y renderiza el tablero en tiempo real.  
-7. 💾 Cuando la partida finaliza o se pausa, el backend persiste la información en Cassandra.  
-8. 📊 El frontend puede consultar el historial de partidas almacenadas y mostrarlas al usuario.  
-
-Este flujo garantiza una experiencia reactiva, con baja latencia y completamente desacoplada entre la lógica de negocio y la interfaz de usuario.
-
----
-
-### 🛑 Detener el sistema
-
-Para finalizar la ejecución y detener todos los contenedores activos, se utiliza el siguiente comando:
+## 🛑 Detener el sistema
 
 ```bash
 docker-compose down
 ```
 
-Este comando detiene y elimina los contenedores, manteniendo las configuraciones listas para un próximo despliegue.
+Este comando detiene y elimina los contenedores activos.
+
+---
