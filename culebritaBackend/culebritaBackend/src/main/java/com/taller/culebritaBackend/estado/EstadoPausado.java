@@ -2,8 +2,8 @@ package com.taller.culebritaBackend.estado;
 
 import com.taller.culebritaBackend.servicio.JuegoServicio;
 
-/**
- * Estado: El juego está pausado, el bucle está detenido.
+/*
+  Estado: El juego está pausado, el bucle está detenido.
  */
 public class EstadoPausado implements EstadoJuego {
 

@@ -13,11 +13,13 @@ import org.springframework.stereotype.Controller;
  El servicio hace el broadcast del estado por /tema/estado.
  */
 @Controller
-public class JuegoControlador {
+public class JuegoControlador {  
 
-    private final JuegoServicio juegoServicio;
 
     @Autowired
+    private final JuegoServicio juegoServicio;
+
+    
     public JuegoControlador(JuegoServicio juegoServicio) {
         this.juegoServicio = juegoServicio;
     }

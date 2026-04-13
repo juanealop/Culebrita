@@ -7,9 +7,9 @@ import org.springframework.data.cassandra.core.mapping.Table;
 import java.time.Instant;
 import java.util.UUID;
 
-/**
- * Entidad Cassandra que representa una partida jugada.
- * Guarda cuánto duró y qué tamaño máximo alcanzó la culebra.
+/*
+  Entidad Cassandra que representa una partida jugada.
+  Guarda cuánto duró y qué tamaño máximo alcanzó la culebra.
  */
 @Table("partidas")
 public class Partida {

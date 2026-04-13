@@ -26,9 +26,8 @@ public class PartidaServicio {
         this.repositorio = repositorio;
     }
 
-    /**
-     * Guarda una partida finalizada en Cassandra.
-     * Si Cassandra no está disponible, registra el error pero no interrumpe el juego.
+    /*
+     Guarda una partida finalizada en Cassandra. Si Cassandra no está disponible, registra el error pero no interrumpe el juego.
      */
     public void guardar(long duracionSegundos, int tamanoMaximo) {
         try {
@@ -44,8 +43,8 @@ public class PartidaServicio {
         }
     }
 
-    /**
-     * Retorna todas las partidas ordenadas de más reciente a más antigua.
+    /*
+      Retorna todas las partidas ordenadas de más reciente a más antigua.
      */
     public List<PartidaDTO> listar() {
         return repositorio.findAll()

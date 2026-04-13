@@ -83,7 +83,7 @@ public class JuegoServicio {
         mensajeria.convertAndSend(DESTINO_HISTORIAL, historial);
     }
 
-    // ─── API interna (usada por los estados) ────────────────────────────────
+    // api interna (usada por los estados) 
 
     public void setEstado(EstadoJuego nuevoEstado) {
         this.estadoActual = nuevoEstado;
@@ -107,7 +107,7 @@ public class JuegoServicio {
         enviarEstado();
     }
 
-    // ─── Lógica del juego ───────────────────────────────────────────────────
+    // Lógica del juego
 
     private synchronized void tickJuego() {
         Posicion siguiente = culebra.calcularSiguientePosicion();
@@ -151,7 +151,7 @@ public class JuegoServicio {
         partidaServicio.guardar(duracion, tamanoMaximo);
     }
 
-    // ─── Helpers ────────────────────────────────────────────────────────────
+    // Helpers 
 
     private void inicializarEntidades() {
         tablero = new Tablero();

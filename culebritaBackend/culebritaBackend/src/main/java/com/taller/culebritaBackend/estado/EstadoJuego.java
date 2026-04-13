@@ -2,10 +2,10 @@ package com.taller.culebritaBackend.estado;
 
 import com.taller.culebritaBackend.servicio.JuegoServicio;
 
-/**
- * Interfaz del patrón de diseño State.
- * Define los eventos posibles del juego. Cada estado concreto
- * implementa el comportamiento adecuado para cada evento.
+/*
+  Interfaz del patrón de diseño State.
+  Define los eventos posibles del juego. Cada estado concreto
+  implementa el comportamiento adecuado para cada evento.
  */
 public interface EstadoJuego {
 

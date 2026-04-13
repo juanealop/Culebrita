@@ -2,8 +2,8 @@ package com.taller.culebritaBackend.estado;
 
 import com.taller.culebritaBackend.servicio.JuegoServicio;
 
-/**
- * Estado: El juego espera que el jugador presione Iniciar.
+/*
+  Estado: El juego espera que el jugador presione Iniciar.
  */
 public class EstadoEsperando implements EstadoJuego {
 

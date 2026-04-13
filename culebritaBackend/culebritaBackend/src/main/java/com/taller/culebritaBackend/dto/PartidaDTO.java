@@ -5,9 +5,8 @@ import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * DTO de respuesta para el historial de partidas.
- * Solo expone los campos que necesita el frontend.
+/*
+ DTO de respuesta para el historial de partidas. Solo expone los campos que necesita el frontend.
  */
 @Getter
 @Setter

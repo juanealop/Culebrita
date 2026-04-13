@@ -2,8 +2,8 @@ package com.taller.culebritaBackend.estado;
 
 import com.taller.culebritaBackend.servicio.JuegoServicio;
 
-/**
- * Estado: La culebra colisionó, el juego terminó.
+/*
+  Estado: La culebra colisionó, el juego terminó.
  */
 public class EstadoTerminado implements EstadoJuego {
 
